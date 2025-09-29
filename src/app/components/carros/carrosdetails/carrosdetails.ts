@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { Carro } from '../../../models/carro';
@@ -6,18 +6,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-carrosdetails',
+  standalone: true,
   imports: [MdbFormsModule, FormsModule],
   templateUrl: './carrosdetails.html',
   styleUrl: './carrosdetails.scss',
 })
 export class Carrosdetails {
-  carro: Carro = new Carro(0, '');
-  router = inject(ActivatedRoute); // pega um parametro de rota
-  router2 = inject(Router); // para fazer redirecionamento
+  @Input("carro") carro: Carro = new Carro(0, "");
+  @Output("retorno") retorno: EventEmitter<any> = new EventEmitter<any>();
+  routerRotaAtivada = inject(ActivatedRoute); // pega um parametro de rota
+  routerRedirect = inject(Router); // para fazer redirecionamento
 
   constructor() {
-    let id = this.router.snapshot.params['id'];
+    let id = this.routerRotaAtivada.snapshot.params['id'];
     if (id > 0) {
       this.findById(id);
     }
@@ -37,7 +38,7 @@ export class Carrosdetails {
         icon: 'success',
         confirmButtonText: 'Ok',
       });
-      this.router2.navigate(['admin/carros'], { state: { carroEditado: this.carro } });
+      this.routerRedirect.navigate(['admin/carros'], { state: { carroEditado: this.carro } });
     } else {
       Swal.fire({
         title: 'Sucesso!',
@@ -45,8 +46,9 @@ export class Carrosdetails {
         icon: 'success',
         confirmButtonText: 'Ok',
       });
-      this.router2.navigate(['admin/carros'], { state: { carroNovo: this.carro } });
+      this.routerRedirect.navigate(['admin/carros'], { state: { carroNovo: this.carro } });
     }
+       this.retorno.emit(this.carro);
   }
 }
 

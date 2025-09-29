@@ -1,22 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, inject, TemplateRef, ViewChild } from '@angular/core';
 import { Carro } from '../../../models/carro';
 import { RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
+import { MdbModalModule, MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { Carrosdetails } from "../carrosdetails/carrosdetails";
 
 @Component({
   selector: 'app-carroslist',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, MdbModalModule, Carrosdetails],
   templateUrl: './carroslist.html',
   styleUrl: './carroslist.scss',
 })
 export class Carroslist {
   lista: Carro[] = [];
+  carroEdit: Carro = new Carro(0,"");
+
+   // elementos da modal
+
+   modalService = inject(MdbModalService); // para conseguir abrir a modal
+   @ViewChild("modalCarroDetalhe") modalCarroDetalhe!: TemplateRef<any>;
+   modalRef!: MdbModalRef<any>;
+
+
 
   constructor() {
     this.lista.push(new Carro(1, 'Fiesta'));
     this.lista.push(new Carro(2, 'Monza'));
     this.lista.push(new Carro(3, 'Ka'));
+
 
     let carroNovo = history.state.carroNovo;
     let carroEditado = history.state.carroEditado;
@@ -44,9 +56,7 @@ export class Carroslist {
       cancelButtonText: "Não",
     }).then((result) => {
       if (result.isConfirmed) {
-        let indice = this.lista.findIndex((x) => {
-          return x.id == carro.id;
-        });
+        let indice = this.lista.findIndex((arrElem) => {return arrElem.id == carro.id});
         this.lista.splice(indice, 1);
         Swal.fire({
           title: 'Deletado com sucesso!',
@@ -57,4 +67,19 @@ export class Carroslist {
       }
     });
   }
+
+ new() {
+  this.carroEdit = new Carro(0,"");
+  this.modalRef = this.modalService.open(this.modalCarroDetalhe);
+ }
+
+ edit(carro:Carro) {
+  this.carroEdit = carro;
+  this.modalRef = this.modalService.open(this.modalCarroDetalhe);
+ }
+
+ retornoDetalhe(carro: Carro) {
+
+ }
+
 }

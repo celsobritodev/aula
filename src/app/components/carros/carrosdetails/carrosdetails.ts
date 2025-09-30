@@ -6,14 +6,20 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
+  selector: 'app-carrosdetails',
   standalone: true,
   imports: [MdbFormsModule, FormsModule],
   templateUrl: './carrosdetails.html',
   styleUrl: './carrosdetails.scss',
 })
+
 export class Carrosdetails {
+
+  // com input 'carro' está visível de fora: pode ser referenciado por componentes 'html'
   @Input("carro") carro: Carro = new Carro(0, "");
+  // saida de dados
   @Output("retorno") retorno: EventEmitter<any> = new EventEmitter<any>();
+
   routerRotaAtivada = inject(ActivatedRoute); // pega um parametro de rota
   routerRedirect = inject(Router); // para fazer redirecionamento
 

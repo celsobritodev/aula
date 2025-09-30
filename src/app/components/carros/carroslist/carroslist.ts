@@ -17,7 +17,6 @@ export class Carroslist {
   carroEdit: Carro = new Carro(0,"");
 
    // elementos da modal
-
    modalService = inject(MdbModalService); // para conseguir abrir a modal
    @ViewChild("modalCarroDetalhe") modalCarroDetalhe!: TemplateRef<any>;
    modalRef!: MdbModalRef<any>;
@@ -74,11 +73,21 @@ export class Carroslist {
  }
 
  edit(carro:Carro) {
-  this.carroEdit = carro;
+  this.carroEdit = Object.assign({},carro); // clonando para evitar referencia ao objeto
   this.modalRef = this.modalService.open(this.modalCarroDetalhe);
  }
 
  retornoDetalhe(carro: Carro) {
+
+  if(carro.id>0) { // o carro ja existe
+    let indice = this.lista.findIndex( x=> {return x.id == carro.id});
+    this.lista[indice] = carro;
+  } else {
+    carro.id = 55; // atribui id ao novo carro
+    this.lista.push(carro);
+  }
+
+  this.modalRef.close();
 
  }
 

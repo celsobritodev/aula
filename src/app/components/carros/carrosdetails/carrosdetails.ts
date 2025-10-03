@@ -4,6 +4,7 @@ import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { Carro } from '../../../models/carro';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { Carroservice } from '../../../services/carroservice';
 
 @Component({
   selector: 'app-carrosdetails',
@@ -23,6 +24,8 @@ export class Carrosdetails {
   routerRotaAtivada = inject(ActivatedRoute); // pega um parametro de rota
   routerRedirect = inject(Router); // para fazer redirecionamento
 
+  carroService = inject(Carroservice);
+
   constructor() {
     let id = this.routerRotaAtivada.snapshot.params['id'];
     if (id > 0) {
@@ -31,30 +34,72 @@ export class Carrosdetails {
   }
 
   findById(id: number) {
-    // busca no back end
-    let carroRetornado: Carro = new Carro(id, 'Fiesta');
-    this.carro = carroRetornado;
+
+    this.carroService.findById(id).subscribe({
+      next: retorno => {
+        this.carro = retorno;
+      },
+      error: erro => {
+        Swal.fire({
+          title: 'Ocorreu um erro',
+          icon: 'error',
+          confirmButtonText: 'Ok',
+        })
+      }
+    });
+
   }
 
   save() {
-    if (this.carro.id > 0) {
-      Swal.fire({
-        title: 'Sucesso!',
-        text: 'Editado com sucesso!',
-        icon: 'success',
-        confirmButtonText: 'Ok',
+    if (this.carro.id > 0) { // se for alteracao
+
+      this.carroService.update(this.carro, this.carro.id).subscribe({
+        next: mensagem => {
+
+          Swal.fire({
+            title: mensagem,
+            icon: 'error',
+            confirmButtonText: 'Ok',
+          });
+          this.routerRedirect.navigate(['admin/carros'], { state: { carroEditado: this.carro } });
+          this.retorno.emit(this.carro);
+        },
+        error: erro => {
+          Swal.fire({
+            title: 'Ocorreu um erro',
+            icon: 'error',
+            confirmButtonText: 'Ok',
+          })
+        }
       });
-      this.routerRedirect.navigate(['admin/carros'], { state: { carroEditado: this.carro } });
+
+
+
     } else {
-      Swal.fire({
-        title: 'Sucesso!',
-        text: 'Salvo com sucesso!',
-        icon: 'success',
-        confirmButtonText: 'Ok',
+
+      // se for inclusao
+      this.carroService.save(this.carro).subscribe({
+        next: mensagem => {
+          Swal.fire({
+            title: mensagem,
+            icon: 'error',
+            confirmButtonText: 'Ok',
+          });
+          this.routerRedirect.navigate(['admin/carros'], { state: { carroNovo: this.carro } });
+          this.retorno.emit(this.carro);
+        },
+        error: erro => {
+          Swal.fire({
+            title: 'Ocorreu um erro',
+            icon: 'error',
+            confirmButtonText: 'Ok',
+          })
+        }
       });
-      this.routerRedirect.navigate(['admin/carros'], { state: { carroNovo: this.carro } });
+
+
     }
-       this.retorno.emit(this.carro);
+
   }
 }
 

@@ -1,14 +1,16 @@
 import { Component, inject, TemplateRef, ViewChild } from '@angular/core';
 import { Carro } from '../../../models/carro';
-import { RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
 import { MdbModalModule, MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { Carrosdetails } from "../carrosdetails/carrosdetails";
+import { Carroservice } from '../../../services/carroservice';
+
+
 
 @Component({
   selector: 'app-carroslist',
   standalone: true,
-  imports: [RouterLink, MdbModalModule, Carrosdetails],
+  imports: [ MdbModalModule, Carrosdetails],
   templateUrl: './carroslist.html',
   styleUrl: './carroslist.scss',
 })
@@ -21,13 +23,11 @@ export class Carroslist {
    @ViewChild("modalCarroDetalhe") modalCarroDetalhe!: TemplateRef<any>;
    modalRef!: MdbModalRef<any>;
 
-
+  carroService = inject(Carroservice);
 
   constructor() {
-    this.lista.push(new Carro(1, 'Fiesta'));
-    this.lista.push(new Carro(2, 'Monza'));
-    this.lista.push(new Carro(3, 'Ka'));
 
+    this.listAll();
 
     let carroNovo = history.state.carroNovo;
     let carroEditado = history.state.carroEditado;
@@ -45,6 +45,24 @@ export class Carroslist {
     }
   }
 
+  listAll() {
+    this.carroService.listAll().subscribe({ // quando o back retornar o que se espera
+      next:listaBack => {
+        this.lista = listaBack
+
+      },
+      error: erro => { // quando ocorrer qualquer erro (badrequest, exceptions)
+        Swal.fire({
+          title: 'Ocorreu um erro',
+          icon: 'error',
+          confirmButtonText: 'Ok',
+        })
+
+      }
+    })
+
+  }
+
   deleteById(carro: Carro) {
     Swal.fire({
       title: 'Tem certeza que deseja deletar este registro?',
@@ -55,14 +73,27 @@ export class Carroslist {
       cancelButtonText: "Não",
     }).then((result) => {
       if (result.isConfirmed) {
-        let indice = this.lista.findIndex((arrElem) => {return arrElem.id == carro.id});
-        this.lista.splice(indice, 1);
+
+     this.carroService.delete(carro.id).subscribe({
+      next:mensagem => {
         Swal.fire({
-          title: 'Deletado com sucesso!',
-          icon: 'warning',
-          showConfirmButton: true,
-          confirmButtonText: 'Ok'
-        });
+          title: mensagem,
+          icon: 'success',
+          confirmButtonText: 'Ok',
+        })
+     this.listAll();
+
+      },
+      error: erro => { // quando ocorrer qualquer erro (badrequest, exceptions)
+         Swal.fire({
+          title: 'Ocorreu um erro',
+          icon: 'error',
+          confirmButtonText: 'Ok',
+        })
+
+      }
+    });
+
       }
     });
   }
@@ -79,14 +110,7 @@ export class Carroslist {
 
  retornoDetalhe(carro: Carro) {
 
-  if(carro.id>0) { // o carro ja existe
-    let indice = this.lista.findIndex( x=> {return x.id == carro.id});
-    this.lista[indice] = carro;
-  } else {
-    carro.id = 55; // atribui id ao novo carro
-    this.lista.push(carro);
-  }
-
+  this.listAll();
   this.modalRef.close();
 
  }

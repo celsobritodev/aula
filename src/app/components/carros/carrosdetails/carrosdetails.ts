@@ -54,7 +54,6 @@ export class Carrosdetails {
 
   save() {
     if ((this.carro.id ?? 0) > 0) { // se for alteracao
-
       this.carroService.update(this.carro, this.carro.id!).subscribe({
         next: mensagem => {
 
@@ -75,11 +74,7 @@ export class Carrosdetails {
         }
       });
 
-
-
-    } else {
-
-      // se for inclusao
+    } else { // se for inclusao
       this.carroService.save(this.carro).subscribe({
         next: mensagem => {
           Swal.fire({

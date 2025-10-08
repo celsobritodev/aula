@@ -7,32 +7,32 @@ import { Carro } from '../models/carro';
   providedIn: 'root',
 })
 export class Carroservice {
-
+  
   private http = inject(HttpClient);
 
   private API = 'http://localhost:8080/api/carro';
 
   constructor() {}
 
-
   save(carro: Carro): Observable<string> {
+    // Cria uma cópia do carro para não alterar o original
+    const carroParaSalvar = { ...carro };
 
-  // Cria uma cópia do carro para não alterar o original
-  const carroParaSalvar = { ...carro };
-
-  // Remove o id se for 0, null ou undefined
-  if (!carroParaSalvar.id || carroParaSalvar.id === 0) {
-    delete carroParaSalvar.id;
-  }
+    // Remove o id se for 0, null ou undefined
+    // se nao fizer isto vai dar erro de chave atribuida quando for inclusao
+    // porque quem atribui a chave é o banco de dados
+    if (!carroParaSalvar.id || carroParaSalvar.id === 0) {
+      delete carroParaSalvar.id;
+    }
 
     // devido as chaves estrangeiras um carro a ser salvo precisa de uma marca_id = 2
     // porque tem uma tabela de nome marca que tem uma marca cujo id=2
-    carroParaSalvar.marca_id=2;
+    carroParaSalvar.marca_id = 2;
 
-    return this.http.post<string>(this.API + '/save', carroParaSalvar,{
-       responseType: 'text' as 'json',
-       withCredentials: true
-       });
+    return this.http.post<string>(this.API + '/save', carroParaSalvar, {
+      responseType: 'text' as 'json',
+      withCredentials: true,
+    });
   }
 
   listAll(): Observable<Carro[]> {
@@ -41,16 +41,17 @@ export class Carroservice {
 
   delete(id?: number): Observable<string> {
     if (!id) {
-    throw new Error("ID inválido para exclusão");
+      throw new Error('ID inválido para exclusão');
+    }
+    return this.http.delete<string>(this.API + '/delete/' + id, {
+       responseType: 'text' as 'json',
+       withCredentials: true, });
   }
-    return this.http.delete<string>(this.API + '/delete/' + id, { responseType: 'text' as 'json' });
-  }
-
-
 
   update(carro: Carro, id: number): Observable<string> {
     return this.http.put<string>(this.API + '/update/' + id, carro, {
       responseType: 'text' as 'json',
+      withCredentials: true,
     });
   }
 

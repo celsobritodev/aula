@@ -16,7 +16,20 @@ export class Carroservice {
 
 
   save(carro: Carro): Observable<string> {
-    return this.http.post<string>(this.API + '/save', carro,{
+
+  // Cria uma cópia do carro para não alterar o original
+  const carroParaSalvar = { ...carro };
+
+  // Remove o id se for 0, null ou undefined
+  if (!carroParaSalvar.id || carroParaSalvar.id === 0) {
+    delete carroParaSalvar.id;
+  }
+
+    // devido as chaves estrangeiras um carro a ser salvo precisa de uma marca_id = 2
+    // porque tem uma tabela de nome marca que tem uma marca cujo id=2
+    carroParaSalvar.marca_id=2;
+
+    return this.http.post<string>(this.API + '/save', carroParaSalvar,{
        responseType: 'text' as 'json',
        withCredentials: true
        });
@@ -26,7 +39,10 @@ export class Carroservice {
     return this.http.get<Carro[]>(this.API + '/listAll');
   }
 
-  delete(id: number): Observable<string> {
+  delete(id?: number): Observable<string> {
+    if (!id) {
+    throw new Error("ID inválido para exclusão");
+  }
     return this.http.delete<string>(this.API + '/delete/' + id, { responseType: 'text' as 'json' });
   }
 

@@ -53,14 +53,14 @@ export class Carrosdetails {
   }
 
   save() {
-    if (this.carro.id > 0) { // se for alteracao
+    if ((this.carro.id ?? 0) > 0) { // se for alteracao
 
-      this.carroService.update(this.carro, this.carro.id).subscribe({
+      this.carroService.update(this.carro, this.carro.id!).subscribe({
         next: mensagem => {
 
           Swal.fire({
             title: mensagem,
-            icon: 'error',
+            icon: 'success',
             confirmButtonText: 'Ok',
           });
           this.routerRedirect.navigate(['admin/carros'], { state: { carroEditado: this.carro } });

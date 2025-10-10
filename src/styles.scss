@@ -1,8 +1,10 @@
+@use 'mdb-angular-ui-kit/assets/scss/mdb.scss';
+@import '@fortawesome/fontawesome-free/css/all.css';
+
+
 .centralizar {
   text-align: center;
 }
-@import '@fortawesome/fontawesome-free/css/all.css';
-@import 'mdb-angular-ui-kit/assets/scss/mdb.scss';
 
 
 
@@ -18,4 +20,5 @@
 body {
   background-color: rgb(226,226,226);
 }
+
 

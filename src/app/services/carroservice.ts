@@ -7,7 +7,7 @@ import { Carro } from '../models/carro';
   providedIn: 'root',
 })
 export class Carroservice {
-  
+
   private http = inject(HttpClient);
 
   private API = 'http://localhost:8080/api/carro';
@@ -27,7 +27,7 @@ export class Carroservice {
 
     // devido as chaves estrangeiras um carro a ser salvo precisa de uma marca_id = 2
     // porque tem uma tabela de nome marca que tem uma marca cujo id=2
-    carroParaSalvar.marca_id = 2;
+    //carroParaSalvar.marca_id = 2;
 
     return this.http.post<string>(this.API + '/save', carroParaSalvar, {
       responseType: 'text' as 'json',

@@ -9,8 +9,31 @@
           <h3>Cadastro de carro</h3>
           <br />
           <mdb-form-control>
-            <input mdbInput type="text" id="carro" class="form-control" [(ngModel)]="carro.nome" />
-            <label mdbLabel class="form-label" for="carro">Nome</label>
+
+            <div class="form-outline mb-4">
+              <input mdbInput type="text" id="carroNome" class="form-control input-borda-visivel"
+                [(ngModel)]="carro.nome" />
+              <label mdbLabel class="form-label" for="carroNome">Nome</label>
+            </div>
+
+            <div class="form-outline mb-4">
+              <input mdbInput type="text" id="carroAno" class="form-control input-borda-visivel"
+                [(ngModel)]="carro.ano" />
+              <label mdbLabel class="form-label" for="carroAno">Ano</label>
+            </div>
+
+            <div class="form-outline mb-4">
+              <input mdbInput type="text" id="carroModelo" class="form-control input-borda-visivel"
+                [(ngModel)]="carro.modelo" />
+              <label mdbLabel class="form-label" for="carroModelo">Modelo</label>
+            </div>
+
+             <div class="form-outline mb-4">
+              <input mdbInput type="text" id="carroAnoFabricacao" class="form-control input-borda-visivel"
+                [(ngModel)]="carro.anoFabricacao" />
+              <label mdbLabel class="form-label" for="carroAnoFabricacao">Ano de fabricação</label>
+            </div>
+
           </mdb-form-control>
           <br />
 

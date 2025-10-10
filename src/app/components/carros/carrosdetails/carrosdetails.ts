@@ -17,7 +17,7 @@ import { Carroservice } from '../../../services/carroservice';
 export class Carrosdetails {
 
   // com input 'carro' está visível de fora: pode ser referenciado por componentes 'html'
-  @Input("carro") carro: Carro = new Carro(0, 0,"",0,"","",0);
+  @Input("carro") carro: Carro = new Carro(0, 0,"",0,"",0);
   // saida de dados
   @Output("retorno") retorno: EventEmitter<any> = new EventEmitter<any>();
 

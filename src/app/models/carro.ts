@@ -4,7 +4,6 @@ export class Carro {
   ano?: number;
   nome!: string;
   marca_id?: number;
-  marca?: string;
   modelo?: string;
   anoFabricacao?: number;
 
@@ -13,7 +12,6 @@ export class Carro {
               ano:number,
               nome:string,
               marca_id:number,
-              marca:string,
               modelo:string,
               anoFabricacao:number) {
     this.id = id;

@@ -3,6 +3,8 @@ import { MdbModalModule, MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit
 import { Marca } from '../../../models/marca';
 
 import { Marcasdetails } from '../marcasdetails/marcasdetails';
+import { Marcaservice } from '../../../services/marcaservice';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-marcaslist',
@@ -28,24 +30,24 @@ export class Marcaslist {
   constructor() {
     this.listAll();
 
-    let carroNovo = history.state.carroNovo;
-    let carroEditado = history.state.carroEditado;
+    let marcaNova = history.state.marcaNova;
+    let marcaEditada = history.state.marcaEditada;
 
-    if (carroNovo) {
-      carroNovo.id = 555;
-      this.lista.push(carroNovo);
+    if (marcaNova) {
+      marcaNova.id = 555;
+      this.lista.push(marcaNova);
     }
 
-    if (carroEditado) {
+    if (marcaEditada) {
       let indice = this.lista.findIndex((x) => {
-        return x.id == carroEditado.id;
+        return x.id == marcaEditada.id;
       });
-      this.lista[indice] = carroEditado;
+      this.lista[indice] = marcaEditada;
     }
   }
 
   listAll() {
-    this.carroService.listAll().subscribe({
+    this.marcaService.listAll().subscribe({
       // quando o back retornar o que se espera
       next: (listaBack) => {
         this.lista = listaBack;
@@ -61,7 +63,7 @@ export class Marcaslist {
     });
   }
 
-  deleteById(carro: Carro) {
+  deleteById(marca: Marca) {
     Swal.fire({
       title: 'Tem certeza que deseja deletar este registro?',
       icon: 'warning',
@@ -71,16 +73,16 @@ export class Marcaslist {
       cancelButtonText: 'Não',
     }).then((result) => {
       if (result.isConfirmed) {
-        if (!carro.id) {
+        if (!marca.id) {
           Swal.fire({
-            title: 'O carro selecionado não possui ID válido',
+            title: 'A marca selecionada não possui ID válido',
             icon: 'error',
             confirmButtonText: 'Ok',
           });
           return;
         }
 
-        this.carroService.delete(carro.id).subscribe({
+        this.marcaService.delete(marca.id).subscribe({
           next: (mensagem) => {
             Swal.fire({
               title: mensagem,
@@ -103,16 +105,16 @@ export class Marcaslist {
   }
 
   new() {
-    this.carroEdit =  new Carro(0, 0,"",0,"",0);
-    this.modalRef = this.modalService.open(this.modalCarroDetalhe);
+    this.marcaEdit =  new Marca(0, "","");
+    this.modalRef = this.modalService.open(this.modalMarcaDetalhe);
   }
 
-  edit(carro: Carro) {
-    this.carroEdit = Object.assign({}, carro); // clonando para evitar referencia ao objeto
-    this.modalRef = this.modalService.open(this.modalCarroDetalhe);
+  edit(marca: Marca) {
+    this.marcaEdit = Object.assign({}, marca); // clonando para evitar referencia ao objeto
+    this.modalRef = this.modalService.open(this.modalMarcaDetalhe);
   }
 
-  retornoDetalhe(carro: Carro) {
+  retornoDetalhe(marca: Marca) {
     this.listAll();
     this.modalRef.close();
   }

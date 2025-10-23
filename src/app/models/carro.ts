@@ -1,8 +1,8 @@
 export class Carro {
 
   id?: number;
-  ano?: number;
-  nome!: string;
+  ano?: number; // a interrogacao indica que o campo e opcional
+  nome!: string; // a exclamação indica que o campo é obrigatório
   marca_id?: number;
   modelo?: string;
   anoFabricacao?: number;

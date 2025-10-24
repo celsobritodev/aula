@@ -1,1 +1,37 @@
-<p>marcasdetails works!</p>
+<br />
+<div class="container">
+  <div class="row">
+
+
+    <div class="col-lg-12 centralizar topo">
+      <div class="card">
+        <div class="card-body">
+          <h3>Cadastro de marca</h3>
+          <br />
+          <mdb-form-control>
+
+            <div class="form-outline mb-4">
+              <input mdbInput type="text" id="marcaNome" class="form-control input-borda-visivel"
+                [(ngModel)]="marca.nome" />
+              <label mdbLabel class="form-label" for="marcaNome">Nome</label>
+            </div>
+
+            <div class="form-outline mb-4">
+              <input mdbInput type="text" id="marcaCnpj" class="form-control input-borda-visivel"
+                [(ngModel)]="marca.cnpj" />
+              <label mdbLabel class="form-label" for="marcaCnpj">Cnpj</label>
+            </div>
+
+          </mdb-form-control>
+          <br />
+
+          <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="save()">
+            Salvar
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>

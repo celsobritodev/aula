@@ -1,0 +1,11 @@
+
+  .input-borda-visivel {
+    border: 1px solid #ced4da !important;
+    border-radius: 0.375rem;
+    padding: 0.375rem 0.75rem;
+  }
+
+  .input-borda-visivel:focus {
+    border-color: #3b71ca !important;
+    box-shadow: 0 0 0 0.2rem rgba(59, 113, 202, 0.25);
+  }

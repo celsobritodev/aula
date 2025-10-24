@@ -1,3 +1,4 @@
+
 <br />
 <div class="container">
   <div class="row">
@@ -36,6 +37,71 @@
 
           </mdb-form-control>
           <br />
+
+
+<br />
+<div class="container">
+  <div class="row">
+
+
+    <div class="col-lg-12 centralizar topo">
+      <div class="card">
+        <div class="card-body">
+          <h3>Cadastro de carro</h3>
+          <br />
+          <mdb-form-control>
+
+            <div class="form-outline mb-4">
+              <input mdbInput type="text" id="carroNome" class="form-control input-borda-visivel"
+                [(ngModel)]="carro.nome" />
+              <label mdbLabel class="form-label" for="carroNome">Nome</label>
+            </div>
+
+            <div class="form-outline mb-4">
+              <input mdbInput type="text" id="carroAno" class="form-control input-borda-visivel"
+                [(ngModel)]="carro.ano" />
+              <label mdbLabel class="form-label" for="carroAno">Ano</label>
+            </div>
+
+            <div class="form-outline mb-4">
+              <input mdbInput type="text" id="carroModelo" class="form-control input-borda-visivel"
+                [(ngModel)]="carro.modelo" />
+              <label mdbLabel class="form-label" for="carroModelo">Modelo</label>
+            </div>
+
+             <div class="form-outline mb-4">
+              <input mdbInput type="text" id="carroAnoFabricacao" class="form-control input-borda-visivel"
+                [(ngModel)]="carro.anoFabricacao" />
+              <label mdbLabel class="form-label" for="carroAnoFabricacao">Ano de fabricação</label>
+            </div>
+
+          </mdb-form-control>
+          <br />
+
+          <div>
+          @if(carro.marca==null) {  <!-- Se nao tiver marca mostra o botao -->
+              <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="save()">
+                Buscar Marca
+              </button>
+            } @else {
+              <span class="text-primary">Marca: {{carro.marca.nome}}</span>
+              <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="save()">
+                Trocar Marca
+              </button>
+            }
+          </div>
+
+          <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="save()">
+            Salvar
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
 
           <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="save()">
             Salvar

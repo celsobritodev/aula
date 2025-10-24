@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { MdbModalModule, MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { Carrosdetails } from '../carrosdetails/carrosdetails';
 import { Carroservice } from '../../../services/carroservice';
+import { Marca } from '../../../models/marca';
 
 @Component({
   selector: 'app-carroslist',
@@ -17,7 +18,7 @@ import { Carroservice } from '../../../services/carroservice';
 
 export class Carroslist {
   lista: Carro[] = [];
-  carroEdit: Carro = new Carro(0, 0,"",0,"",0);
+  carroEdit: Carro = new Carro(0, 0,"",0,"",0, new Marca(0,"",""));
 
   // elementos da modal
   modalService = inject(MdbModalService); // para conseguir abrir a modal
@@ -104,7 +105,7 @@ export class Carroslist {
   }
 
   new() {
-    this.carroEdit =  new Carro(0, 0,"",0,"",0);
+    this.carroEdit =  new Carro(0, 0,"",0,"",0, new Marca(0,"",""));
     this.modalRef = this.modalService.open(this.modalCarroDetalhe);
   }
 

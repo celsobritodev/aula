@@ -1,4 +1,4 @@
-import { Component, inject, TemplateRef, ViewChild } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output, TemplateRef, ViewChild } from '@angular/core';
 import { MdbModalModule, MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { Marca } from '../../../models/marca';
 
@@ -17,8 +17,13 @@ import Swal from 'sweetalert2';
 
 export class Marcaslist {
 
+
   lista: Marca[] = [];
   marcaEdit: Marca = new Marca(0,"","");
+
+
+  @Input("esconderBotoes") esconderBotes: boolean = false;
+  @Output("retorno") retorno: EventEmitter<any> = new EventEmitter<any>();
 
   // elementos da modal
   modalService = inject(MdbModalService); // para conseguir abrir a modal
@@ -118,6 +123,12 @@ export class Marcaslist {
     this.listAll();
     this.modalRef.close();
   }
+
+
+  select(marca: Marca) {
+    this.retorno.emit(marca);
+
+}
 
 
 }

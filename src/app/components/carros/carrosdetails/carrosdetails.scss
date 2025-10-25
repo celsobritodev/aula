@@ -9,3 +9,16 @@
     border-color: #3b71ca !important;
     box-shadow: 0 0 0 0.2rem rgba(59, 113, 202, 0.25);
   }
+
+
+  .meu-card-grande {
+  min-height: 500px; /* altura mínima */
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+
+}
+
+.meu-card-grande .card-body {
+  padding: 2rem;
+}

@@ -5,47 +5,7 @@
 
 
     <div class="col-lg-12 centralizar topo">
-      <div class="card">
-        <div class="card-body">
-          <h3>Cadastro de carro</h3>
-          <br />
-          <mdb-form-control>
-
-            <div class="form-outline mb-4">
-              <input mdbInput type="text" id="carroNome" class="form-control input-borda-visivel"
-                [(ngModel)]="carro.nome" />
-              <label mdbLabel class="form-label" for="carroNome">Nome</label>
-            </div>
-
-            <div class="form-outline mb-4">
-              <input mdbInput type="text" id="carroAno" class="form-control input-borda-visivel"
-                [(ngModel)]="carro.ano" />
-              <label mdbLabel class="form-label" for="carroAno">Ano</label>
-            </div>
-
-            <div class="form-outline mb-4">
-              <input mdbInput type="text" id="carroModelo" class="form-control input-borda-visivel"
-                [(ngModel)]="carro.modelo" />
-              <label mdbLabel class="form-label" for="carroModelo">Modelo</label>
-            </div>
-
-             <div class="form-outline mb-4">
-              <input mdbInput type="text" id="carroAnoFabricacao" class="form-control input-borda-visivel"
-                [(ngModel)]="carro.anoFabricacao" />
-              <label mdbLabel class="form-label" for="carroAnoFabricacao">Ano de fabricação</label>
-            </div>
-
-          </mdb-form-control>
-          <br />
-
-
-<br />
-<div class="container">
-  <div class="row">
-
-
-    <div class="col-lg-12 centralizar topo">
-      <div class="card">
+      <div class="card meu-card-grande">
         <div class="card-body">
           <h3>Cadastro de carro</h3>
           <br />
@@ -79,18 +39,19 @@
           <br />
 
           <div>
-          @if(carro.marca==null) {  <!-- Se nao tiver marca mostra o botao -->
-              <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="save()">
-                Buscar Marca
-              </button>
-            } @else {
-              <span class="text-primary">Marca: {{carro.marca.nome}}</span>
-              <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="save()">
-                Trocar Marca
-              </button>
-            }
+           @if((carro.marca==null)) {  <!-- Se nao tiver marca mostra o botao -->
+            <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="buscarMarca()">
+              Buscar Marca
+            </button>
+          } @else {
+            <span class="text-primary">Marca: {{carro.marca.nome}}</span>
+            <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="buscarMarca()">
+              Trocar Marca
+            </button>
+          }
           </div>
-
+          <br>
+          <br>
           <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="save()">
             Salvar
           </button>
@@ -103,13 +64,17 @@
 </div>
 
 
-          <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="save()">
-            Salvar
-          </button>
-        </div>
-      </div>
-    </div>
 
+<ng-template #modalMarcas>
 
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Cadastro</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()">
+    </button>
   </div>
-</div>
+
+  <div class="modal-body">
+    <app-marcaslist [esconderBotoes]="true" (retorno)="retornoMarca($event)"></app-marcaslist>
+  </div>
+
+</ng-template>

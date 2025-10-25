@@ -105,7 +105,8 @@ export class Carroslist {
   }
 
   new() {
-    this.carroEdit =  new Carro(0, 0,"",0,"",0, new Marca(0,"",""));
+   // this.carroEdit =  new Carro(0, 0,"",0,"",0, new Marca(0,"",""));
+    this.carroEdit =  new Carro(0, 0,"",0,"",0, null);
     this.modalRef = this.modalService.open(this.modalCarroDetalhe);
   }
 

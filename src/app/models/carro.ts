@@ -8,7 +8,7 @@ export class Carro {
   marca_id?: number;
   modelo?: string;
   anoFabricacao?: number;
-  marca! : Marca;
+  marca : Marca | null =null; // permite null
 
 
   constructor(id: number,
@@ -17,7 +17,7 @@ export class Carro {
               marca_id:number,
               modelo:string,
               anoFabricacao:number,
-              marca:Marca ) {
+              marca:Marca | null) {
     this.id = id;
     this.ano=ano;
     this.nome = nome;

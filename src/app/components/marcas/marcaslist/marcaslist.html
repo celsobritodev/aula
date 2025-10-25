@@ -30,12 +30,19 @@
                 <td>{{ marca.nome }}</td>
                 <td>{{ marca.cnpj }}</td>
                 <td class="direita">
+                  @if(esconderBotes) {
+                  <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="select(marca)">
+                    Selecionar
+                  </button>
+                  }@else {
                   <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="edit(marca)">
                     Editar
                   </button>
                   <button type="button" class="btn btn-danger btn-rounded" mdbRipple (click)="deleteById(marca)">
                     Deletar
                   </button>
+                  }
+
                 </td>
               </tr>
               }
@@ -65,4 +72,3 @@
 
 
 </ng-template>
-

@@ -31,13 +31,13 @@
                 <td>{{ marca.cnpj }}</td>
                 <td class="direita">
                   @if(esconderBotes) {
-                  <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="select(marca)">
+                   <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="select(marca)">
                     Selecionar
-                  </button>
+                   </button>
                   }@else {
-                  <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="edit(marca)">
+                   <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="edit(marca)">
                     Editar
-                  </button>
+                   </button>
                   <button type="button" class="btn btn-danger btn-rounded" mdbRipple (click)="deleteById(marca)">
                     Deletar
                   </button>

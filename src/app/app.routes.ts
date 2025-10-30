@@ -5,6 +5,8 @@ import { Carroslist } from './components/carros/carroslist/carroslist';
 import { Carrosdetails } from './components/carros/carrosdetails/carrosdetails';
 import { Marcaslist } from './components/marcas/marcaslist/marcaslist';
 import { Marcasdetails } from './components/marcas/marcasdetails/marcasdetails';
+import { Acessorioslist } from './components/acessorios/acessorioslist/acessorioslist';
+import { Acessoriosdetails } from './components/acessorios/acessoriosdetails/acessoriosdetails';
 
 export const routes: Routes = [
   {path: "", redirectTo: "login", pathMatch: 'full'},
@@ -16,5 +18,8 @@ export const routes: Routes = [
     {path: "marcas", component: Marcaslist},
     {path: "marcas/new", component :Marcasdetails },
     {path: "marcas/edit/:id", component: Marcasdetails},
+    {path: "acessorios", component: Acessorioslist},
+    {path: "acessorios/new", component :Acessoriosdetails },
+    {path: "acessorios/edit/:id", component: Acessoriosdetails},
   ]}
 ];

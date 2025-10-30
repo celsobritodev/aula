@@ -3,6 +3,9 @@
 https://youtu.be/3FWhqzG39UQ?list=PLtII2Mw41oA0LLJgLVeyRWO5IPUtdfRth
 Curso - Spring Boot e Angular | 13 - Angular 17: Layout com Material Design PARTE 3 (front-end)
 
+https://youtu.be/co3sLQECxIk?list=PLtII2Mw41oA0LLJgLVeyRWO5IPUtdfRth
+Curso - Spring Boot e Angular | 20 - Angular 17: Relacionamento N para N (front e back)
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.0.
 
 ## Development server

@@ -147,20 +147,10 @@ export class Carrosdetails {
 
    retornoAcessorio(acessorio: Acessorio) {
     console.log('Acessorio selecionado:', acessorio);
-
     if(this.carro.acessorios==null) {
       this.carro.acessorios=[];
     }
     this.carro.acessorios.push(acessorio); // coloca o acessorio na lista acessorios
-
-    //alert('selecionado acessorio: '+acessorio.nome)
-
-    // this.carro.acessorio = acessorio;
-    // this.carro.marca_id = marca.id;
-
-    // console.log('Carro após selecionar marca:', this.carro);
-    // console.log('marca_id definido como:', this.carro.marca_id);
-
     this.modalRef.close();
   }
 

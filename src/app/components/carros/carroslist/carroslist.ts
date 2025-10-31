@@ -18,7 +18,7 @@ import { Marca } from '../../../models/marca';
 
 export class Carroslist {
   lista: Carro[] = [];
-  carroEdit: Carro = new Carro(0, 0,"",0,"",0, null);
+  carroEdit: Carro = new Carro(0, 0,"",0,"",0, null,[]);
 
   // elementos da modal
   modalService = inject(MdbModalService); // para conseguir abrir a modal
@@ -106,12 +106,16 @@ export class Carroslist {
 
   new() {
       // Novo carro com marca = null (será definido no details)
-    this.carroEdit =  new Carro(0, 0,"",0,"",0, null);
+    this.carroEdit =  new Carro(0, 0,"",0,"",0, null,[]);
     this.modalRef = this.modalService.open(this.modalCarroDetalhe);
   }
 
   edit(carro: Carro) {
     this.carroEdit = Object.assign({}, carro); // clonando para evitar referencia ao objeto
+     // GARANTIR que acessorios nunca seja null
+    if (!this.carroEdit.acessorios) {
+      this.carroEdit.acessorios = [];
+    }
     this.modalRef = this.modalService.open(this.modalCarroDetalhe);
   }
 

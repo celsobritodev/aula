@@ -1,3 +1,4 @@
+import { Acessorio } from "./acessorio";
 import { Marca } from "./marca";
 
 export class Carro {
@@ -9,6 +10,7 @@ export class Carro {
   modelo?: string;
   anoFabricacao?: number;
   marca : Marca | null =null; // permite null
+  acessorios: Acessorio[] = [];
 
 
   constructor(id: number,
@@ -17,7 +19,9 @@ export class Carro {
               marca_id:number,
               modelo:string,
               anoFabricacao:number,
-              marca:Marca | null) {
+              marca:Marca | null,
+              acessorios: Acessorio[] =[]) {
+                
     this.id = id;
     this.ano=ano;
     this.nome = nome;
@@ -25,6 +29,7 @@ export class Carro {
     this.modelo=modelo;
     this.anoFabricacao=anoFabricacao;
     this.marca = marca;
+    this.acessorios = acessorios;
 
   }
 

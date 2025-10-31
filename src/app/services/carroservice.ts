@@ -20,7 +20,8 @@ export class Carroservice {
     nome: carro.nome,
     ano: carro.ano,
     modelo: carro.modelo,
-    anoFabricacao: carro.anoFabricacao
+    anoFabricacao: carro.anoFabricacao,
+    acessorios: carro.acessorios && carro.acessorios.length > 0 ? carro.acessorios : [] // ← ADICIONE ESTA LINHA
   };
 
   // DEBUG: Verifique o que temos disponível

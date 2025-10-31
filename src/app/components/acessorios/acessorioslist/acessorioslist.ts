@@ -1,13 +1,13 @@
 import { Component, EventEmitter, inject, Input, Output, TemplateRef, ViewChild } from '@angular/core';
 import { Acessorio } from '../../../models/acessorio';
-import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { MdbModalModule,MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { Acessorioservice } from '../../../services/acessorioservice';
 import Swal from 'sweetalert2';
 import { Acessoriosdetails } from "../acessoriosdetails/acessoriosdetails";
 
 @Component({
   selector: 'app-acessorioslist',
-  imports: [Acessoriosdetails],
+  imports: [MdbModalModule,Acessoriosdetails],
   templateUrl: './acessorioslist.html',
   styleUrl: './acessorioslist.scss'
 })

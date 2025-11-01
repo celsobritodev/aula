@@ -44,11 +44,19 @@
               Buscar Marca
             </button>
           } @else {
-            <span class="text-primary">Marca: {{carro.marca.nome}}</span>
+            <div class="row">
+              <div class="col-lg-8">
+                <p class="text-primary alert-primary">Marca: {{carro.marca.nome}}</p>
+              </div>
+              <div class="col-lg-4">
+                <button type="button" class="btn btn-warning btn-rounded" mdbRipple (click)="buscarMarca()">
+                 Trocar Marca
+                </button>
+              </div>
+            </div>
+
             <br>
-            <button type="button" class="btn btn-warning btn-rounded" mdbRipple (click)="buscarMarca()">
-              Trocar Marca
-            </button>
+
           }
           </div>
 

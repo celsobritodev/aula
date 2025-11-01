@@ -155,6 +155,8 @@ export class Carrosdetails {
   }
 
   desvincularAcessorioCarro(acessorio: Acessorio) {
+    let posicao = this.carro.acessorios.findIndex(x=> {return x.id==acessorio.id});
+    this.carro.acessorios.splice(posicao,1);
 
   }
 

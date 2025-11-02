@@ -11,6 +11,7 @@ import { Acessoriosdetails } from './components/acessorios/acessoriosdetails/ace
 export const routes: Routes = [
   {path: "", redirectTo: "login", pathMatch: 'full'},
   {path: "login", component : Login},
+  
   {path: "admin", component: Principal, children: [
     {path: "carros", component: Carroslist},
     {path: "carros/new", component :Carrosdetails },

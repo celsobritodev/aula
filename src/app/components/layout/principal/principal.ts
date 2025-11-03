@@ -6,7 +6,7 @@ import { Sidebar } from "../sidebar/sidebar";
 @Component({
   selector: 'app-principal',
   standalone:true,
-  imports: [Menu, RouterOutlet, Sidebar],
+  imports: [Menu, RouterOutlet],
   templateUrl: './principal.html',
   styleUrl: './principal.scss'
 })

@@ -32,7 +32,10 @@ export class Login {
         console.log(token);
         if(token) { // o usuario e senha digitados estavam corretos
           this.loginService.addToken(token);
-          this.router.navigate(['/admin/carros']);
+          if(this.loginService.hasRole('ADMIN'))
+           this.router.navigate(['/admin/carros']);
+          else if(this.loginService.hasRole('USER'))
+            this.router.navigate(['/admin/marcas']);
         } else { // ou o usuario ou a senha estao incorretos
           alert('usuário ou senha incorretos')
         }

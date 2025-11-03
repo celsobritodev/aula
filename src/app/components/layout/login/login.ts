@@ -2,30 +2,46 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
+import { Loginmodel } from '../../../auth/loginmodel';
+import { LoginService } from '../../../auth/login.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-imports: [
-    MdbFormsModule, FormsModule
-  ],
+  imports: [MdbFormsModule, FormsModule],
   templateUrl: './login.html',
-  styleUrl: './login.scss'
+  styleUrl: './login.scss',
 })
 export class Login {
-
-  usuario!: string;
-  senha!: string;
+  loginModel: Loginmodel = new Loginmodel();
+  //usuario!: string;
+ // senha!: string;
 
   router = inject(Router);
+  loginService = inject(LoginService);
+
+ constructor() {
+  this.loginService.removerToken();
+ }
+
 
   logar() {
-    if(this.usuario=='admin' && this.senha=='admin') {
-      // redirecionar para carroslist
-      this.router.navigate(['admin/carros'])
-    } else
-      alert('Usuario ou senha estão incorretos!')
+
+    this.loginService.logar(this.loginModel).subscribe({
+      next: token => {
+        console.log(token);
+        if(token) { // o usuario e senha digitados estavam corretos
+          this.loginService.addToken(token);
+          this.router.navigate(['/admin/carros']);
+        } else { // ou o usuario ou a senha estao incorretos
+          alert('usuário ou senha incorretos')
+        }
+
+      },
+      error: erro => {
+        alert('deu erro');
+      }
+    })
+
   }
-
-
 }

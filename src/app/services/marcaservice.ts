@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Marca } from '../models/marca';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class Marcaservice {
 
   private http = inject(HttpClient);
 
-  private API = 'http://localhost:8080/api/marca';
+  private API = environment.SERVIDOR+'/api/marca';
 
   constructor() {}
 
